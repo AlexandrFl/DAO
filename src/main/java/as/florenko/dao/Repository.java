@@ -11,9 +11,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.stream.Collectors;
+
 @Component
 public class Repository {
     private final String SCRIPT = "Script.sql";
+
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJDBCTemplate;
 
@@ -27,11 +29,9 @@ public class Repository {
     }
 
     public String getProductName(String clientName) {
-        String cName = "'" + clientName + "'";
-        OrderInfo orderInfo = namedParameterJDBCTemplate.queryForObject(read(SCRIPT), Map.of("name", cName),
-                (rs, info) -> new OrderInfo(rs.getString("name"), rs.getString("product_name")));
-        return orderInfo.getORDER_NAME();
-//        return clientName;
+        return namedParameterJDBCTemplate.queryForObject(read(SCRIPT),
+                Map.of("name", clientName),
+                (rs, prod) -> rs.getString("product_name"));
     }
 }
 

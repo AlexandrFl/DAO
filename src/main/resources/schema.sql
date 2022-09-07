@@ -1,5 +1,3 @@
-create schema hwtwo;
-
 create table customers
 (
     id int primary key auto_increment,
