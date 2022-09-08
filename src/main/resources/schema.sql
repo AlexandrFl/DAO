@@ -10,7 +10,6 @@ create table customers
 create table orders
 (
     id serial primary key not null,
-    date timestamp default now(),
     customers_id int not null,
     product_name varchar(250) not null ,
     amount int check ( amount > 0 ),
